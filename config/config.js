@@ -2,20 +2,19 @@
 
 // The server port - the port to run Pokemon Showdown under
 exports.port = 8000;
-exports.serverid = 'dragonheaven';
-exports.servertoken = 'ydQWcNst+Ghe';
+exports.serverid='ruspokecommunity';
 
 // proxyip - proxy IPs with trusted X-Forwarded-For headers
 //   This can be either false (meaning not to trust any proxies) or an array
 //   of strings. Each string should be either an IP address or a subnet given
 //   in CIDR notation. You should usually leave this as `false` unless you
 //   know what you are doing.
-exports.proxyip = 'false';
+exports.proxyip = false;
 
 // Pokemon of the Day - put a pokemon's name here to make it Pokemon of the Day
 //   The PotD will always be in the #2 slot (not #1 so it won't be a lead)
 //   in every Random Battle team.
-exports.potd = '';
+exports.potd = 'random';
 
 // crash guard - write errors to log file instead of crashing
 //   This is normally not recommended - if Node wants to crash, the
@@ -70,7 +69,7 @@ Y929lRybWEiKUr+4Yw2O1W0CAwEAAQ==
 //   like the upside-down exclamation mark (looks like an i), the Greek omicron (looks
 //   like an o), etc. Disable only if you need one of the alphabets it disables, such as
 //   Greek or Cyrillic.
-exports.disablebasicnamefilter = true;
+exports.disablebasicnamefilter = false;
 
 // report joins and leaves - shows messages like "<USERNAME> joined"
 //   Join and leave messages are small and consolidated, so there will never
@@ -186,10 +185,18 @@ exports.tellrank = '+';
 // displayed in the client.
 exports.customavatars = {
 	//'userid': 'customavatar.png'
+  'elveman': 'elveman.png',
+  'vovaxx11':'vovaxx11.png',
+  'gagaslittlemonster':'gagaslittlemonster.png',
+  'nyalol':'nyalol.png',
+  'evfan':'evfan.png',
+  'platemiy':'platemiy.png',
+  'liebad':'liebad.png',
+  'jasondeluxe':'jasondeluxe.png'
 };
 
 // custom avatars appear in profile by specifiying server url.
-exports.avatarurl = 'http://138.68.26.217';
+exports.avatarurl = 'http://80.87.192.58';
 
 // Tournament announcements
 // When tournaments are created in rooms listed below, they will be announced in
@@ -198,7 +205,7 @@ exports.avatarurl = 'http://138.68.26.217';
 // tourroom - specify a room to receive tournament announcements (defaults to
 // the room 'tournaments').
 // tourannouncements - announcements are only allowed in these rooms
-exports.tourroom = 'dragonrusharena';
+exports.tourroom = 'tournaments';
 exports.tourannouncements = [/* roomids */];
 
 // appealurl - specify a URL containing information on how users can appeal
@@ -266,8 +273,8 @@ exports.replsocketmode = 0o600;
 exports.grouplist = [
 	{
 		symbol: '⚔',
-		id: "dragonknight",
-		name: "Dragon Knight",
+		id: "rpc",
+		name: "RPC",
 		inherit: '~',
 		globalonly: true
 	},
