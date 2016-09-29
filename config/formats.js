@@ -356,6 +356,18 @@ exports.Formats = [
 	// Randomized Metas
 	///////////////////////////////////////////////////////////////////
 	{
+		name: "Moody Metronome battle",
+		desc: ["Battle with 6 Moody Smeargles with Metronome. Pretty random."],
+		section: "RPC Metas",
+		mod: 'moodymetronome',
+		team: 'random',
+		gameType: 'triples',
+		ruleset: ['Pokemon', 'HP Percentage Mod', 'Cancel Mod'],
+		onTrapPokemon: function (pokemon) {
+				pokemon.tryTrap();
+			},
+	},
+	{	
 		name: "0v0",
 		section: "Randomized Metas",
 		team: 'random', // Just so a team can be generated so the "battle" can occur
@@ -367,18 +379,6 @@ exports.Formats = [
 			let p = 'p' + (this.random(2) + 1);
 			this.win(this[p]);
 		},
-	},
-	{
-		name: "Moody Metronome battle",
-		desc: ["Battle with 6 Moody Smeargles with Metronome. Pretty random."],
-		section: "RPC Metas",
-		mod: 'moodymetronome',
-		team: 'random',
-		gameType: 'triples',
-		ruleset: ['Pokemon', 'HP Percentage Mod', 'Cancel Mod'],
-		onTrapPokemon: function (pokemon) {
-				pokemon.tryTrap();
-			},
 	},
 	{
 		name: "Random Battle",
