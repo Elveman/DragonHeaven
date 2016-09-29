@@ -856,8 +856,9 @@ class Tournament {
 		let tourSize = this.generator.users.size;
 
 		if (this.room.isOfficial && tourSize >= sizeRequiredToEarn) {
-			let firstMoney = Math.round(tourSize / 4);
+			let firstMoney = Math.round(tourSize * 1.5);
 			let secondMoney = Math.round(firstMoney / 2);
+			let eeMoney = Math.round(secondMoney / 2);
 
 			Db('money').set(wid, Db('money').get(wid, 0) + firstMoney);
 			this.room.addRaw("<b><font color='" + color + "'>" + Tools.escapeHTML(winner) + "</font> has won " + "<font color='" + color + "'>" + firstMoney + "</font>" + currencyName(firstMoney) + " for winning the tournament!</b>");
@@ -866,6 +867,10 @@ class Tournament {
 				Db('money').set(rid, Db('money').get(rid, 0) + secondMoney);
 				this.room.addRaw("<b><font color='" + color + "'>" + Tools.escapeHTML(runnerUp) + "</font> has won " +  "<font color='" + color + "'>" + secondMoney + "</font>" + currencyName(secondMoney) + " for winning the tournament!</b>");
 			}
+			for (let participant in this.players) {
+			Db('money').set(participant, Db('money').get(participant, 0) + eeMoney);
+			}
+			this.room.addRaw("<b> Everyone got " + eeMoney + currencyName(secondMoney) + " for participation!</b>");
 		}
 		delete exports.tournaments[this.room.id];
 		delete this.room.game;

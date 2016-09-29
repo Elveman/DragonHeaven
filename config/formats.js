@@ -369,6 +369,18 @@ exports.Formats = [
 		},
 	},
 	{
+		name: "Moody Metronome battle",
+		desc: ["Battle with 6 Moody Smeargles with Metronome. Pretty random."],
+		section: "RPC Metas",
+		mod: 'moodymetronome',
+		team: 'random',
+		gameType: 'triples',
+		ruleset: ['Pokemon', 'HP Percentage Mod', 'Cancel Mod'],
+		onTrapPokemon: function (pokemon) {
+				pokemon.tryTrap();
+			},
+	},
+	{
 		name: "Random Battle",
 		desc: ["Randomized teams of level-balanced Pok&eacute;mon with sets that are generated to be competitively viable."],
 		section: "Randomized Metas",
@@ -3060,7 +3072,13 @@ return problems;
         }
     },
 
-
+	{
+		name: "Same Type Stealth Rock",
+		desc: ["User's primary type affects the type of Stealth Rock."],
+		mod: 'stsr',
+		section: "New Other Metagames",
+		ruleset: ['OU'],
+	},
 	{
         	name: "Anti-Vaxxers",
 		desc: ["All type-based immunities cease to apply."],
