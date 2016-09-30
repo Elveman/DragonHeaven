@@ -2,6 +2,7 @@
 
 // The server port - the port to run Pokemon Showdown under
 exports.port = 8000;
+exports.serverid='ruspokecommunity';
 
 // proxyip - proxy IPs with trusted X-Forwarded-For headers
 //   This can be either false (meaning not to trust any proxies) or an array
@@ -13,7 +14,7 @@ exports.proxyip = false;
 // Pokemon of the Day - put a pokemon's name here to make it Pokemon of the Day
 //   The PotD will always be in the #2 slot (not #1 so it won't be a lead)
 //   in every Random Battle team.
-exports.potd = '';
+exports.potd = 'random';
 
 // crash guard - write errors to log file instead of crashing
 //   This is normally not recommended - if Node wants to crash, the
@@ -88,7 +89,7 @@ exports.reportjoinsperiod = 0;
 // report battles - shows messages like "OU battle started" in the lobby
 //   This feature can lag larger servers - turn this off if your server is
 //   getting more than 160 or so users.
-exports.reportbattles = true;
+exports.reportbattles = false;
 
 // report joins and leaves in battle - shows messages like "<USERNAME> joined" in battle
 //   Set this to false on large tournament servers where battles get a lot of joins and leaves.
@@ -106,9 +107,9 @@ exports.reportbattlejoins = true;
 // chat modchat - default minimum group for speaking in chatrooms; changeable with /modchat
 exports.chatmodchat = false;
 // battle modchat - default minimum group for speaking in battles; changeable with /modchat
-exports.battlemodchat = false;
+exports.battlemodchat = true;
 // pm modchat - minimum group for PMing other users, challenging other users, and laddering
-exports.pmmodchat = false;
+exports.pmmodchat = true;
 
 // forced timer - force the timer on for all battles
 //   Players will be unable to turn it off.
@@ -184,10 +185,18 @@ exports.tellrank = '+';
 // displayed in the client.
 exports.customavatars = {
 	//'userid': 'customavatar.png'
+  'elveman': 'elveman.png',
+  'vovaxx11':'vovaxx11.png',
+  'gagaslittlemonster':'gagaslittlemonster.png',
+  'nyalol':'nyalol.png',
+  'evfan':'evfan.png',
+  'platemiy':'platemiy.png',
+  'liebad':'liebad.png',
+  'jasondeluxe':'jasondeluxe.png'
 };
 
 // custom avatars appear in profile by specifiying server url.
-exports.avatarurl = '';
+exports.avatarurl = 'http://80.87.192.58';
 
 // Tournament announcements
 // When tournaments are created in rooms listed below, they will be announced in
@@ -196,7 +205,7 @@ exports.avatarurl = '';
 // tourroom - specify a room to receive tournament announcements (defaults to
 // the room 'tournaments').
 // tourannouncements - announcements are only allowed in these rooms
-exports.tourroom = '';
+exports.tourroom = 'tournaments';
 exports.tourannouncements = [/* roomids */];
 
 // appealurl - specify a URL containing information on how users can appeal
@@ -263,6 +272,13 @@ exports.replsocketmode = 0o600;
 //     - gamemanagement: enable/disable games and minigames.
 exports.grouplist = [
 	{
+		symbol: '⚔',
+		id: "rpc",
+		name: "RPC",
+		inherit: '~',
+		globalonly: true
+	},
+	{
 		symbol: '~',
 		id: "admin",
 		name: "Administrator",
@@ -283,14 +299,22 @@ exports.grouplist = [
 		forcewin: true,
 		declare: true,
 		modchatall: true,
-		rangeban: true,
 		makeroom: true,
 		editroom: true,
 		potd: true,
 		disableladder: true,
-		globalonly: true,
+                globalonly: true,
 		tournamentsmanagement: true,
 		gamemanagement: true,
+	},
+	{
+		symbol: '#',
+		id: "founder",
+		name: "Room Founder",
+		inherit: '#',
+		jurisdiction: 'u',
+		roomowner: true,
+		roomonly: true,
 	},
 	{
 		symbol: '#',
@@ -301,6 +325,8 @@ exports.grouplist = [
 		roombot: true,
 		roommod: true,
 		roomdriver: true,
+                roommeme: true,
+                roomoperator: true,
 		editroom: true,
 		declare: true,
 		modchatall: true,
@@ -318,7 +344,6 @@ exports.grouplist = [
 		roomonly: true,
 		editroom: true,
 		joinbattle: true,
-		nooverride: true,
 	},
 	{
 		symbol: '*',
@@ -337,7 +362,9 @@ exports.grouplist = [
 		jurisdiction: 'u',
 		ban: true,
 		modchat: true,
+                roommeme: true,
 		roomvoice: true,
+		rangeban: true,
 		forcerename: true,
 		ip: true,
 		alts: '@u',
@@ -365,6 +392,24 @@ exports.grouplist = [
 		jeopardy: true,
 		joinbattle: true,
 		minigame: true,
+	},
+	{
+		symbol: '$',
+		id: "operator",
+		name: "Operator",
+		inherit: '+',
+		jurisdiction: 'u',
+		warn: true,
+		kick: true,
+		mute: true,
+		joinbattle: true
+	},
+	{
+		symbol: '>',
+		id: "meme",
+		name: "Esteemed Meme",
+		inherit: '+',
+		joinbattle: true
 	},
 	{
 		symbol: '+',
