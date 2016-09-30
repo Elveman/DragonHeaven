@@ -3,8 +3,8 @@
 const fs = require('fs');
 const color = require('../config/color');
 
-let adWhitelist = (Config.adWhitelist ? Config.adWhitelist : ['dragonheaven.psim.us']);
-let bannedMessages = (Config.bannedMessages ? Config.bannedMessages : []);
+let adWhitelist = (Config.adWhitelist ? Config.adWhitelist : ['ruspokecommunity.psim.us', 'dragonheaven.psim.us', 'smogtours.psim.us']);
+let bannedMessages = (Config.bannedMessages ? Config.bannedMessages : ['.psim.us']);
 let adRegex = new RegExp("(play.pokemonshowdown.com\\/~~)(?!(" + adWhitelist.join('|') + "))", "g");
 
 Config.chatfilter = function (message, user, room, connection) {

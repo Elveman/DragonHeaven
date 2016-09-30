@@ -12,7 +12,10 @@ exports.commands = {
 			"Профиль: /profile<br>" +
 			"Выйти с сервера с фанфарами: /poof [сообщение]<br>" +
 			"Статус: /away, /back, /away [сообщение]<br>" +
-			"Эмотиконы: /emoticons, /blockemoticons, /unblockemoticons<br>" +
+			"Поиск аниме и манги: /anime, /manga<br>" +
+			"Карточки TCG: /cardshelp, <br>" +
+			"Магазины в комнатах: /roomshophelp<br>" +
+			"UNO: /unohelp<br>" +
 			"И многие другие"
 		);
 	},

@@ -24,6 +24,7 @@ exports.commands = {
                     "- " + hashColor('ClassyZ', true) + " (DHSSB, Development)<br />" +
                     "- " + hashColor('Diarmuid O\'Dyna', true) + " (Art)<br />" +
                     "- " + hashColor('Eternal Mayhem', true) + " (Roomintro's)<br />" +
+		    "- " + hashColor('Elveman', true) + " Theft of code and some adaptations<br />" +
 					"<br />" +
 					"<u>Special Thanks:</u><br />" +
 					"- Current staff team<br />" +
