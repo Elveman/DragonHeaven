@@ -428,7 +428,7 @@ exports.Formats = [
 				pokemon.tryTrap();
 			},
 	},
-	{	
+/*	{	
 		name: "0v0",
 		section: "Randomized Metas",
 		column: 2,
@@ -441,7 +441,7 @@ exports.Formats = [
 			let p = 'p' + (this.random(2) + 1);
 			this.win(this[p]);
 		},
-	},
+	}, */
 	{
 		name: "Random Battle",
 		desc: ["Randomized teams of level-balanced Pok&eacute;mon with sets that are generated to be competitively viable."],
@@ -477,7 +477,7 @@ exports.Formats = [
 		team: 'randomFactory',
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Mega Rayquaza Clause'],
 	},
-	{
+/*	{
 		name: "Rock, Paper, Scissors",
 		desc: ["&bullet; Test your luck with RPS!"],
 		section: "Randomized Metas",
@@ -563,7 +563,7 @@ exports.Formats = [
 		onModifyPokemon: function (pokemon) {
 			let name = toId(pokemon.name);
 		},
-	},
+	}, */
 	{
 		name: "Dragon Heaven Super Staff Bros [Beta]",
 		desc: ["&bullet; The staff here becomes a Pokemon and battles!"],
