@@ -2347,6 +2347,17 @@ exports.Formats = [
 		}
 	},
 	{
+        	name: "Random VoltTurn Mayhem",
+        	desc: ["&bullet; <a href=\"http://www.smogon.com/forums/threads/voltturn-mayhem-lcotm.3527847/\">VoltTurn Mayhem</a>"],
+	        section: "Randomized Metas",
+        	team: 'random',
+        	onModifyMove: function (move) {
+	     if (move.target && !move.nonGhostTarget && (move.target === "normal" || move.target === "any" || move.target === "randomNormal" || move.target === "allAdjacent" || move.target === "allAdjacentFoes")) {
+        	        move.selfSwitch = true;
+        	    }
+        	}
+    	},
+	{
         name: "Random Camomons",
         desc: [
             "Pok&eacute;mon change type to match their first two moves.",
