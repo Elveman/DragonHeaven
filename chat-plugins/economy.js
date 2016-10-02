@@ -346,6 +346,7 @@ exports.commands = {
 		if (!this.can('broadcast', null, room)) return false;
 		if (!target) return this.parse('/help startdice');
 		if (!this.canTalk()) return this.errorReply("Нельзя начинать игру под mute.");
+		if (room.id !== 'game corner') return this.errorReply("Игру можно проводить только в Game Corner.");
 
 		let amount = isMoney(target);
 
