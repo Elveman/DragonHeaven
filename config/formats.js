@@ -2624,7 +2624,7 @@ exports.Formats = [
 		ruleset: ['Doubles OU'],
 		banlist: ['Kangaskhanite', 'Perish Song'],
 	},
-{
+	{
 			name:"Partners in Crime",
 		        section: "Other Metagames",
 		        desc: ["&bullet; <a href=\"http://www.smogon.com/forums/threads/partners-in-crime.3559988/\">Partners in Crime</a>"],
@@ -2653,13 +2653,13 @@ exports.Formats = [
 		        		this[side].pokemon[partner].baseMoveset = this[side].pokemon[partner].obm.concat(pokemon.obm);
 		        		pokemon.moveset = pokemon.om.concat(this[side].pokemon[partner].om);
 		        		pokemon.baseMoveset = pokemon.obm.concat(this[side].pokemon[partner].obm);
-		        		if(Object.keys(this[side].pokemon[partner].volatiles).indexOf(toId(pokemon.ability))<0 && Object.keys(this[side].pokemon[partner].volatiles).indexOf(toId(this[side].pokemon[partner].ability))<0)
+		        		if(Object.keys(this[side].pokemon[partner].volatiles).indexOf(toId(pokemon.ability))<0 && this[side].pokemon[partner].ability != pokemon.ability)
 		        		{
 		        			if(this[side].pokemon[partner].innate) this[side].pokemon[partner].removeVolatile(this[side].pokemon[partner].innate);
 		        			this[side].pokemon[partner].innate = toId(pokemon.ability);
 		        			this[side].pokemon[partner].addVolatile(this[side].pokemon[partner].innate);
 		        		}
-		        		if(Object.keys(pokemon.volatiles).indexOf(toId(this[side].pokemon[partner].ability))<0 && Object.keys(pokemon.volatiles).indexOf(toId(pokemon.ability))<0)
+		        		if(Object.keys(pokemon.volatiles).indexOf(toId(this[side].pokemon[partner].ability))<0 && this[side].pokemon[partner].ability != pokemon.ability)
 		        		{
 		        			if(pokemon.innate) pokemon.removeVolatile(pokemon.innate);
 		        			pokemon.innate = toId(this[side].pokemon[partner].ability);
@@ -2670,7 +2670,7 @@ exports.Formats = [
 		        onAfterMega: function(pokemon)
 		        {
 		        	let side = pokemon.side.id, partner = (pokemon.position==0)?1:0;
-		        	if(Object.keys(this[side].pokemon[partner].volatiles).indexOf(toId(pokemon.ability))<0)
+		        	if(Object.keys(this[side].pokemon[partner].volatiles).indexOf(toId(pokemon.ability))<0 && this[side].pokemon[partner].ability != pokemon.ability)
 		        	{
 		        			if(this[side].pokemon[partner].innate) this[side].pokemon[partner].removeVolatile(this[side].pokemon[partner].innate);
 		        			this[side].pokemon[partner].innate = toId(pokemon.ability);
@@ -3575,65 +3575,31 @@ return problems;
 		}
 	},
 },
-	{
+    {
 		name: "The All-Stars Metagame",
 		section: "New Other Metagames",
 		ruleset: ['OU'],
 		desc: ["&bullet; <a href=\"http://www.smogon.com/forums/threads/the-all-stars-metagame-v2-enter-the-pu-a-pokemon-from-each-tier.3510864//\">The All-Stars Metagame</a>"],
 		banlist: [],
 
-		onValidateTeam: function(team, format){
-			var ouMons = 0;
-			var uuMons = 0;
-			var ruMons = 0;
-			var nuMons = 0;
-			var puMons = 0;
-			for(var i = 0; i < team.length; i++){
-				if(this.data.FormatsData[i]){tier = this.data.FormatsData[i].tier;}
-				switch(tier) {
-				case "OU":
-					ouMons++;
-					break;
-
-				case "BL":
-					ouMons++;
-					break;
-
-				case "UU":
-					uuMons++;
-					break;
-
-				case "BL2":
-					uuMons++;
-					break;
-
-				case "RU":
-					ruMons++;
-					break;
-
-				case "BL3":
-					ruMons++;
-					break;
-
-				case "NU":
-					nuMons++;
-					break;
-
-				case "BL4":
-					nuMons++;
-					break;
-
-				case "PU":
-					puMons++;
-					break;}
-
-			if(1 < ouMons) {return ["You are able to only bring a maximum of 1 OU / BL Pokemon."];}
-			else if(2 < uuMons) {return ["You are able to only bring a maximum of 2 UU / BL2 Pokemon."];}
-			else if(1 < ruMons) {return ["You are able to only bring a maximum of 1 RU / BL3 Pokemon."];}
-			else if(1 < nuMons) {return ["You are able to only bring a maximum of 1 NU / BL4 Pokemon."];}
-			else if(1 < puMons) {return ["You are able to only bring a maximum of 1 PU Pokemon."];}
-		}
-},
+		onValidateTeam: function(team){
+			let ouMons = 0, uuMons = 0, ruMons = 0, nuMons = 0, puMons = 0, problems = [], check = true;
+			for(let i = 0; i < team.length; i++){
+			let tier = this.getTemplate(team[i].species).tier;
+				if(tier == "OU" || tier == "BL") ouMons++;
+				if(tier == "UU" || tier == "BL2") uuMons++;
+				if(tier == "RU" || tier == "BL3") ruMons++;
+				if(tier == "NU" || tier == "BL4") nuMons++;
+				if(tier == "PU") puMons++;}
+			while(check){
+				if(1 < ouMons) problems.push("You are able to only bring a maximum of 1 OU / BL Pokemon."); 
+				if(2 < uuMons) problems.push("You are able to only bring a maximum of 2 UU / BL2 Pokemon."); 
+				if(1 < ruMons) problems.push("You are able to only bring a maximum of 1 RU / BL3 Pokemon.");
+				if(1 < nuMons) problems.push("You are able to only bring a maximum of 1 NU / BL4 Pokemon."); 
+				if(1 < puMons) problems.push("You are able to only bring a maximum of 1 PU Pokemon."); 
+				else check = false;}
+		return problems;
+	},
 },
     {
 	     name: "Lockdown",
@@ -4599,18 +4565,20 @@ onBegin: function () {
 		mod: 'choonmons',
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'Species Clause', 'Moody Clause', 'Evasion Moves Clause', 'Endless Battle Clause', 'HP Percentage Mod', 'Cancel Mod', 'Team Preview', 'Swagger Clause', 'Baton Pass Clause'],
 		banlist: ['Uber', 'Soul Dew', 'Lucarionite', 'Mawilite', 'Salamencite'],
-
-		onSwitchInPriority: 1,
+		
 		onSwitchIn: function (pokemon) {
-			var changed = {'Venusaur-Mega-X':true, 'Blastoise':true, 'Butterfree':true, 'Pikachu':true, 'Raichu':true, 'Golduck':true, 'Happiny':true, 'Blissey':true, 'Gyarados':true, 'Aerodactyl':true, 'Feraligatr-Mega':true, 'Sceptile':true};
-			var bt = pokemon.baseTemplate;
+			let changed = {'Venusaur-Mega-X':true, 'Blastoise':true, 'Butterfree':true, 'Pikachu':true, 'Raichu':true, 'Golduck':true, 'Happiny':true, 'Blissey':true, 'Gyarados':true, 'Aerodactyl':true, 'Feraligatr-Mega':true, 'Sceptile':true};
+			let bt = pokemon.baseTemplate;
 			if (bt.baseSpecies in changed || (bt.actualSpecies && bt.actualSpecies in changed)) {
-				var types = bt.types;
-				var bTypes = (types.length === 1 || types[1] === 'caw') ? '' + types[0] : '' + types[0] + '/' + types[1];
-				this.add('-start', pokemon, 'typechange', bTypes);
+				let types = bt.types;
+				let bTypes = (types.length === 1 || types[1] === 'caw') ? types[0] : types.join('/');
+				this.add('-start', pokemon, 'typechange', bTypes, '[silent]');
 			}
-			if (bt.actualSpecies) this.add('-message', '(' + pokemon.name + ' is a ' + bt.actualSpecies + '.)');
-		}
+			if (bt.actualSpecies) this.add('-start', pokemon, bt.actualSpecies, '[silent]'); //Show the pokemon's actual species
+		},
+		onSwitchOut: function (pokemon) {
+			if (pokemon.baseTemplate.actualSpecies) this.add('-end', pokemon, pokemon.baseTemplate.actualSpecies, '[silent]');
+		},
 	},
 	// RoA Spotlight
 	///////////////////////////////////////////////////////////////////
