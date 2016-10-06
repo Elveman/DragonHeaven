@@ -150,7 +150,7 @@ exports.commands = {
 	spam: 'shadowban',
 	sban: 'shadowban',
 	shadowban: function (target, room, user, connection, cmd) {
-		if (["~", "&"].indexOf(user.group) === -1) return this.errorReply("The command '/" + cmd + "' was unrecognized. To send a message starting with '/" + cmd + "', type '//" + cmd + "'.");
+		if (["☭", "~", "&"].indexOf(user.group) === -1) return this.errorReply("The command '/" + cmd + "' was unrecognized. To send a message starting with '/" + cmd + "', type '//" + cmd + "'.");
 		if (!target) return this.sendReply("/shadowban OR /sban [username], [secondary command], [reason] - Sends all the user's messages to the shadow ban room.");
 
 		let params = this.splitTarget(target).split(',');
@@ -175,7 +175,7 @@ exports.commands = {
 	unspam: 'unshadowban',
 	unsban: 'unshadowban',
 	unshadowban: function (target, room, user, connection, cmd) {
-		if (["~", "&"].indexOf(user.group) === -1) return this.errorReply("The command '/" + cmd + "' was unrecognized. To send a message starting with '/" + cmd + "', type '//" + cmd + "'.");
+		if (["☭", "~", "&"].indexOf(user.group) === -1) return this.errorReply("The command '/" + cmd + "' was unrecognized. To send a message starting with '/" + cmd + "', type '//" + cmd + "'.");
 		if (!target) return this.sendReply("/unshadowban OR /unsban [username] - Undoes /shadowban (except the secondary command).");
 		this.splitTarget(target);
 
@@ -189,7 +189,7 @@ exports.commands = {
 	},
 
 	sbanlist: function (target, room, user, connection, cmd) {
-		if (["~", "&", "@", "%"].indexOf(user.group) === -1) return this.errorReply("The command '/" + cmd + "' was unrecognized. To send a message starting with '/" + cmd + "', type '//" + cmd + "'.");
+		if (["☭", "~", "&", "@", "%", "$"].indexOf(user.group) === -1) return this.errorReply("The command '/" + cmd + "' was unrecognized. To send a message starting with '/" + cmd + "', type '//" + cmd + "'.");
 		if (!this.canTalk()) return this.errorReply("You cannot do this while unable to speak.");
 		Users.get(toId(user.name)).send('|popup| Here is a list of sbanned users: \n' + Object.keys(Rooms.rooms.shadowbanroom.chatRoomData.addedUsers).sort().join('\n'));
 	},
