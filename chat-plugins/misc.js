@@ -232,7 +232,7 @@ exports.commands = {
 		if (!target) return this.parse('/help music');
 		this.sendReplyBox('<audio  style="width: 99.6%" controls="" autoplay="false" loop="false" src="'+target+'" border: 5px solid #E9DF15; background-color:Blue">Your user agent does not support the HTML5 Audio element.</audio>');
 	},
-	musichelp: ["<code>/music [mp3 link]</code>: Shows a box which can play mp3 music."],
+	musichelp: 'htmlbox <code>/music [mp3 link]</code>: Shows a box which can play mp3 music.',
 
 	tell: function (target, room, user, connection) {
 		if (!target) return this.parse('/help tell');
