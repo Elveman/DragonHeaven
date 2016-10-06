@@ -2617,46 +2617,41 @@ exports.Formats = [
 		banlist: ['Kangaskhanite', 'Perish Song'],
 	},
 {
-				name:"Partners in Crime",
+			name:"Partners in Crime",
 		        section: "Other Metagames",
 		        desc: ["&bullet; <a href=\"http://www.smogon.com/forums/threads/partners-in-crime.3559988/\">Partners in Crime</a>"],
 		        ruleset: ["Doubles OU"],
 		        mod: "pic",
 		        gameType:"doubles",
 		        banlist: ["Huge Power","Kangaskhanite", "Mawilite","Medichamite","Pure Power","Wonder Guard"],
+				onBegin: function()
+				{
+					for(let i=1;i<=2;i++)
+					{
+						for(let j=0;j<this["p"+i].pokemon.length;j++)
+						{
+							this["p"+i].pokemon[j].om = this["p"+i].pokemon[j].moveset;
+							this["p"+i].pokemon[j].obm = this["p"+i].pokemon[j].baseMoveset;
+						}
+					}
+				},
 		        onSwitchIn: function(pokemon)
 		        {
 		        	let side = pokemon.side.id, partner = (pokemon.position==0)?1:0;
-		        	let sm = function (om,mo)
-			        		{
-			        			if(!om) om = mo
-			        			else
-			        			{
-			        				om.move = mo.move;
-			        				om.maxpp = mo.maxpp;
-			        				om.id = mo.id;
-			        			}
-			        		}
 		        	if(pokemon.isActive && this[side].pokemon[partner].isActive)
 		        	{
-		        		for(let i=0;i<4;i++)
-		        		{
-		        			/*sm(pokemon.moveset[i + 4] , this[side].pokemon[partner].moveset[i]);
-		        			sm(pokemon.baseMoveset[i + 4] , this[side].pokemon[partner].baseMoveset[i]);
-		        			sm(this[side].pokemon[partner].moveset[i + 4] , pokemon.moveset[i]);
-		        			sm(this[side].pokemon[partner].baseMoveset[i + 4] , pokemon.baseMoveset[i]); */
-		        			pokemon.moveset[i + 4] = this[side].pokemon[partner].moveset[i];
-		        			pokemon.baseMoveset[i + 4] = this[side].pokemon[partner].baseMoveset[i];
-		        			this[side].pokemon[partner].moveset[i + 4] = pokemon.moveset[i];
-		        			this[side].pokemon[partner].baseMoveset[i + 4] = pokemon.baseMoveset[i]; 
-		        		}
-		        		if(Object.keys(this[side].pokemon[partner].volatiles).indexOf(toId(pokemon.ability))<0)
+		        		let partl = this[side].pokemon[partner].obm.length, pokl = pokemon.obm.length;
+		        		this[side].pokemon[partner].moveset = this[side].pokemon[partner].om.concat(pokemon.om);
+		        		this[side].pokemon[partner].baseMoveset = this[side].pokemon[partner].obm.concat(pokemon.obm);
+		        		pokemon.moveset = pokemon.om.concat(this[side].pokemon[partner].om);
+		        		pokemon.baseMoveset = pokemon.obm.concat(this[side].pokemon[partner].obm);
+		        		if(Object.keys(this[side].pokemon[partner].volatiles).indexOf(toId(pokemon.ability))<0 && Object.keys(this[side].pokemon[partner].volatiles).indexOf(toId(this[side].pokemon[partner].ability))<0)
 		        		{
 		        			if(this[side].pokemon[partner].innate) this[side].pokemon[partner].removeVolatile(this[side].pokemon[partner].innate);
 		        			this[side].pokemon[partner].innate = toId(pokemon.ability);
 		        			this[side].pokemon[partner].addVolatile(this[side].pokemon[partner].innate);
 		        		}
-		        		if(Object.keys(pokemon.volatiles).indexOf(toId(this[side].pokemon[partner].ability))<0)
+		        		if(Object.keys(pokemon.volatiles).indexOf(toId(this[side].pokemon[partner].ability))<0 && Object.keys(pokemon.volatiles).indexOf(toId(pokemon.ability))<0)
 		        		{
 		        			if(pokemon.innate) pokemon.removeVolatile(pokemon.innate);
 		        			pokemon.innate = toId(this[side].pokemon[partner].ability);
@@ -2682,8 +2677,8 @@ exports.Formats = [
 		        		this[side].pokemon[partner].removeVolatile(this[side].pokemon[partner].innate)
 		        		delete this[side].pokemon[partner].innate;
 		        	}
-		        	pokemon.moveset = [pokemon.moveset[0],pokemon.moveset[1],pokemon.moveset[2],pokemon.moveset[3]];
-		        	pokemon.baseMoveset = [pokemon.baseMoveset[0],pokemon.baseMoveset[1],pokemon.baseMoveset[2],pokemon.baseMoveset[3]];
+		        	this[side].pokemon[partner].moveset = this[side].pokemon[partner].om;
+		        	this[side].pokemon[partner].baseMoveset = this[side].pokemon[partner].obm;
 		        },
 		},
 	{
@@ -3572,6 +3567,66 @@ return problems;
 		}
 	},
 },
+	{
+		name: "The All-Stars Metagame",
+		section: "New Other Metagames",
+		ruleset: ['OU'],
+		desc: ["&bullet; <a href=\"http://www.smogon.com/forums/threads/the-all-stars-metagame-v2-enter-the-pu-a-pokemon-from-each-tier.3510864//\">The All-Stars Metagame</a>"],
+		banlist: [],
+
+		onValidateTeam: function(team, format){
+			var ouMons = 0;
+			var uuMons = 0;
+			var ruMons = 0;
+			var nuMons = 0;
+			var puMons = 0;
+			for(var i = 0; i < team.length; i++){
+				if(this.data.FormatsData[i]){tier = this.data.FormatsData[i].tier;}
+				switch(tier) {
+				case "OU":
+					ouMons++;
+					break;
+
+				case "BL":
+					ouMons++;
+					break;
+
+				case "UU":
+					uuMons++;
+					break;
+
+				case "BL2":
+					uuMons++;
+					break;
+
+				case "RU":
+					ruMons++;
+					break;
+
+				case "BL3":
+					ruMons++;
+					break;
+
+				case "NU":
+					nuMons++;
+					break;
+
+				case "BL4":
+					nuMons++;
+					break;
+
+				case "PU":
+					puMons++;
+					break;}
+
+			if(1 < ouMons) {return ["You are able to only bring a maximum of 1 OU / BL Pokemon."];}
+			else if(2 < uuMons) {return ["You are able to only bring a maximum of 2 UU / BL2 Pokemon."];}
+			else if(1 < ruMons) {return ["You are able to only bring a maximum of 1 RU / BL3 Pokemon."];}
+			else if(1 < nuMons) {return ["You are able to only bring a maximum of 1 NU / BL4 Pokemon."];}
+			else if(1 < puMons) {return ["You are able to only bring a maximum of 1 PU Pokemon."];}
+		}
+},
+},
     {
 	     name: "Lockdown",
 	     desc: [
@@ -4341,7 +4396,7 @@ desc:["&bullet;<a href=\"http://www.smogon.com/forums/threads/recyclables.358181
 			let added = {};
 			let movepool = [];
 			let prevo = template.isMega?this.getTemplate(template.species.substring(0,template.species.length-5)).prevo:template.prevo;
-			
+
 			if(!this.data.Learnsets[toId(crossTemplate.species)])
 			{
 			        crossTemplate.learnset = this.data.Learnsets[toId(crossTemplate.species.split("-")[0])].learnset;
