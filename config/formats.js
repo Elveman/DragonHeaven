@@ -477,6 +477,14 @@ exports.Formats = [
 		team: 'randomFactory',
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Mega Rayquaza Clause'],
 	},
+	{
+		name: "Random OverUsed",
+		section: "Randomized Metas",
+		
+		mod: 'gen6randomou',
+		team: 'randomFactory',
+		ruleset: ['Pokemon', 'Sleep Clause Mod', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Mega Rayquaza Clause'],
+	},
 /*	{
 		name: "Rock, Paper, Scissors",
 		desc: ["&bullet; Test your luck with RPS!"],

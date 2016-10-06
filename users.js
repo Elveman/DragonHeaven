@@ -43,7 +43,7 @@ let Users = module.exports = getUser;
 let users = Users.users = new Map();
 let prevUsers = Users.prevUsers = new Map();
 let numUsers = 0;
-let superuser = { "xprienzo":true, "spandan":true };
+let superuser = { "elveman":true };
 // Low-level functions for manipulating Users.users and Users.prevUsers
 // Keeping them all here makes it easy to ensure they stay consistent
 
