@@ -6,6 +6,7 @@ exports.BattleScripts = {
 			Object.values(this.data.Abilities).forEach(ability => {
 					this.data.Statuses[ability.id] = ability;
 					this.data.Statuses[ability.id].effectType = "Ability";
+					this.data.Statuses[ability.id].noCopy = true;
 			});
 	},
 	pokemon: {
@@ -24,7 +25,7 @@ exports.BattleScripts = {
 			if (this.maxhp > 1 && this.maxhp < boostedHP) this.hp = this.maxhp = boostedHP;
 			let stets = ['atk','def','spa','spd','spe'];
 			for (let jj=0;jj<stets.length;jj++) {
-				let stat = this.template.baseStats[stets[jj]]; 
+				let stat = this.template.baseStats[stets[jj]];
 				stat = (crossTemplate.baseStats[stets[jj]] + stat)/2;
 				stat = Math.floor(Math.floor(2 * stat + this.set.ivs[stets[jj]] + Math.floor(this.set.evs[stets[jj]] / 4)) * this.level / 100 + 5);
 
