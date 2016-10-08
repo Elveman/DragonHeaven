@@ -97,7 +97,6 @@ const emotesKeys = Object.keys(emotes).sort();
 * @returns {Boolean|String}
 */
 function parseEmoticons(message, room, user, pm) {
-	room.disableEmoticons = room.disableEmoticons || false;
 	if (typeof message !== 'string' || (!pm && room.disableEmoticons)) return false;
 
 	let match = false;

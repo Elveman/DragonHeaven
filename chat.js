@@ -165,7 +165,7 @@ class CommandContext {
 			message = this.canTalk(message);
 		}
 		
-		if (parseEmoticons(message, this.room, this.user)) return message;
+		if (parseEmoticons(message, this.room, this.user, this.pmTarget)) return message;
 		
 		// Output the message
 
