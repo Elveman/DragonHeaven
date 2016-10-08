@@ -39,6 +39,7 @@ const BROADCAST_TOKEN = '!';
 
 const fs = require('fs');
 const path = require('path');
+const parseEmoticons = require('./chat-plugins/emoticons').parseEmoticons;
 
 class PatternTester {
 	// This class sounds like a RegExp
@@ -163,6 +164,8 @@ class CommandContext {
 
 			message = this.canTalk(message);
 		}
+		
+		if (parseEmoticons(message, this.room, this.user)) return message;
 		
 		// Output the message
 

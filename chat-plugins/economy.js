@@ -166,7 +166,7 @@ exports.commands = {
 
 		const amount = Db('money').get(toId(target), 0);
 		let group = user.getIdentity().charAt(0);
-		this.sendReply("|raw|<font color=#948A88>" + group +  "</font><font color=" + color(user.userid) + "><b>" + Tools.escapeHTML(target) + "</b></font> has " + amount + currencyName(amount) + ".");
+		this.sendReply("|raw|<font color=#948A88>" + group +  "</font><font color=" + color(user.userid) + "><b>" + Chat.escapeHTML(target) + "</b></font> has " + amount + currencyName(amount) + ".");
 	},
 	wallethelp: ["/wallet [user] - Показывает количество денег пользователя."],
 
