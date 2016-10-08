@@ -124,7 +124,7 @@ function parseEmoticons(message, room, user, pm) {
 	message = message.replace(/\*\*([^< ](?:[^<]*?[^< ])?)\*\*/g, '<b>$1</b>');
 
 	let group = user.getIdentity().charAt(0);
-	if (room.auth) group = room.auth[user.userid] || group;
+	if (!pm && room.auth) group = room.auth[user.userid] || group;
 	if (pm && !user.hiding) group = user.group;
 
 	if (pm) return "<div class='chat' style='display:inline'>" + "<em class='mine'>" + message + "</em></div>";
