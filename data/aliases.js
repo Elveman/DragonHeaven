@@ -32,7 +32,6 @@ exports.BattleAliases = {
 	"tasm": "The All-Stars Metagame",
 	"bsdoubles": "Battle Spot Doubles",
 	"bstriples": "Battle Spot Triples",
-	"seasonal": "[Seasonal] Fireworks Frenzy",
 	"dhssb": "Dragon Heaven Super Staff Bros [Beta]",
 	"ssb": "[Main] Super Staff Bros Melee",
 	"createapokemon": "CAP",
@@ -301,6 +300,7 @@ exports.BattleAliases = {
 	"azu": "Azumarill",
 	"bliss": "Blissey",
 	"bee": "Beedrill",
+	"cathy": "Trevenant",
 	"chomp": "Garchomp",
 	"clef": "Clefable",
 	"coba": "Cobalion",
@@ -373,7 +373,8 @@ exports.BattleAliases = {
 	"whimsi": "Whimsicott",
 	"zam": "Alakazam",
 	"zard": "Charizard",
-	"ohmagod":"Plasmanta",
+	"ohmagod": "Plasmanta",
+	"zong": "Bronzong",
 
 	// moves
 	"bb": "Brave Bird",
