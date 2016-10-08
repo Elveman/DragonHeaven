@@ -100,7 +100,7 @@ function parseEmoticons(message, room, user, pm) {
 	try {
 	    room.disableEmoticons;
 	} catch (e) {
-	    let room.disableEmoticons = false;
+	    var room.disableEmoticons = false;
 	}
 	if (typeof message !== 'string' || (!pm && room.disableEmoticons)) return false;
 
