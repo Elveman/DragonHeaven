@@ -691,7 +691,7 @@ class NumberModeTrivia extends Trivia {
 const commands = {
 	new: function (target, room, user) {
 		if (!this.can('broadcast', null, room) || !target) return false;
-		if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
+		if (!this.canTalk()) return;
 		if (room.game) {
 			return this.errorReply("There is already a game of " + room.game.title + " in progress.");
 		}
@@ -762,7 +762,7 @@ const commands = {
 	kick: function (target, room, user) {
 		//if (room.id !== 'trivia') return this.errorReply("This command can only be used in Trivia.");
 		if (!this.can('mute', null, room)) return false;
-		if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
+		if (!this.canTalk()) return;
 		if (!room.game) return this.errorReply("There is no game of trivia in progress.");
 		if (room.game.gameid !== 'trivia') {
 			return this.errorReply("There is already a game of " + room.game.title + " in progress.");
@@ -793,7 +793,7 @@ const commands = {
 	start: function (target, room) {
 		//if (room.id !== 'trivia') return this.errorReply("This command can only be used in Trivia.");
 		if (!this.can('broadcast', null, room)) return false;
-		if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
+		if (!this.canTalk()) return;
 		if (!room.game) return this.errorReply("There is no game of trivia in progress.");
 		if (room.game.gameid !== 'trivia') {
 			return this.errorReply("There is already a game of " + room.game.title + " in progress.");
@@ -822,7 +822,7 @@ const commands = {
 	end: function (target, room, user) {
 		//if (room.id !== 'trivia') return this.errorReply("This command can only be used in Trivia.");
 		if (!this.can('broadcast', null, room)) return false;
-		if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
+		if (!this.canTalk()) return;
 		if (!room.game) return this.errorReply("There is no game of trivia in progress.");
 		if (room.game.gameid !== 'trivia') {
 			return this.errorReply("There is already a game of " + room.game.title + " in progress.");
@@ -876,7 +876,7 @@ const commands = {
 	add: function (target, room, user, connection, cmd) {
 		if (room.id !== 'questionworkshop') return this.errorReply('This command can only be used in Question Workshop.');
 		if (cmd === 'add' && !this.can('mute', null, room) || !target) return false;
-		if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
+		if (!this.canTalk()) return;
 
 		target = target.split('|');
 		if (target.length !== 3) return this.errorReply("Invalid arguments specified. View /help trivia for more information.");
@@ -951,7 +951,7 @@ const commands = {
 	accept: function (target, room, user, connection, cmd) {
 		if (room.id !== 'questionworkshop') return this.errorReply('This command can only be used in Question Workshop.');
 		if (!this.can('ban', null, room)) return false;
-		if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
+		if (!this.canTalk()) return;
 
 		target = target.trim();
 		if (!target) return false;
@@ -1035,7 +1035,7 @@ const commands = {
 	delete: function (target, room, user) {
 		if (room.id !== 'questionworkshop') return this.errorReply('This command can only be used in Question Workshop.');
 		if (!this.can('mute', null, room)) return false;
-		if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
+		if (!this.canTalk()) return;
 
 		target = target.trim();
 		if (!target) return false;
